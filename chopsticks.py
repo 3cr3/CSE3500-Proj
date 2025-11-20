@@ -6,14 +6,14 @@ class Hand:
         self.num_fingers = self.num_fingers + val if self.num_fingers + val < 5 else 0
 
 class Player:
-    def __init__(self, left=Hand(), right=Hand()):
-        self.left = left
-        self.right = right
+    def __init__(self, left=None, right=None):
+        self.left = left if left else Hand()
+        self.right = right if right else Hand()
 
     def add(self, target_hand, val):
-        if target_hand.upper() == "L" and self.left > 0:
+        if target_hand.upper() == "L" and self.left.num_fingers > 0:
             self.left.add(val)
-        elif target_hand.upper() == "R" and self.right > 0:
+        elif target_hand.upper() == "R" and self.right.num_fingers > 0:
             self.right.add(val)
         else:
             print("invalid target")
@@ -25,7 +25,7 @@ class Player:
             return False
         if new_left >= 5 or new_right >= 5:
             return False
-        if new_left == self.left or new_right == self.left:
+        if new_left == self.left.num_fingers or new_right == self.left.num_fingers:
             return False
 
         self.left.num_fingers = new_left
