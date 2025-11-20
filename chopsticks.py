@@ -6,13 +6,29 @@ class Hand:
         self.num_fingers = self.num_fingers + val if self.num_fingers + val < 5 else 0
 
 class Player:
-    def __init__(self, h1=Hand(), h2=Hand()):
-        self.h1 = h1
-        self.h2 = h2
+    def __init__(self, left=Hand(), right=Hand()):
+        self.left = left
+        self.right = right
 
-    def add(self, hand, val):
-        pass
+    def add(self, target_hand, val):
+        if target_hand.upper() == "L" and self.left > 0:
+            self.left.add(val)
+        elif target_hand.upper() == "R" and self.right > 0:
+            self.right.add(val)
+        else:
+            print("invalid target")
     
-    def split(self):
-        pass
-        
+    def split(self, new_left, new_right):
+        total = self.left.num_fingers + self.right.num_fingers
+        # checks for legal split
+        if new_left + new_right != total:
+            return False
+        if new_left >= 5 or new_right >= 5:
+            return False
+        if new_left == self.left or new_right == self.left:
+            return False
+
+        self.left.num_fingers = new_left
+        self.right.num_fingers = new_right
+        return True
+    
