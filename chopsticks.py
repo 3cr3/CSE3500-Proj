@@ -25,7 +25,7 @@ class Player:
             return False
         if new_left >= 5 or new_right >= 5:
             return False
-        if new_left == self.left.num_fingers or new_right == self.left.num_fingers:
+        if new_left == self.left.num_fingers and new_right == self.right.num_fingers:
             return False
 
         self.left.num_fingers = new_left
