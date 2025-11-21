@@ -103,11 +103,11 @@ if __name__ ==  '__main__':
 
             else:
                 #Must be splitting
-                newL = input("What new value would you like your left to be?")
-                newR = input("What new value would you like your right to be?")
+                newL = int(input("What new value would you like your left to be?"))
+                newR = int(input("What new value would you like your right to be?"))
                 while not game.p1.split(newL, newR):
-                    newL = input("Incompatible values. Input an acceptable value for your new left ")
-                    newR = input("And your new right ")
+                    newL = int(input("Incompatible values. Input an acceptable value for your new left "))
+                    newR = int(input("And your new right "))
                 
         else:
             #Switch turn
