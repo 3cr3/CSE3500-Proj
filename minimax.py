@@ -39,9 +39,9 @@ def generate_moves(state, player):
         if 0 <= b <= 4 and sorted((a,b)) != sorted((myL,myR)):
             newState = state.copy()
             if player == 0:
-                newState.p2.split(a, b)
+                if (newState.p2.split(a, b)): new_states.append(newState)
             else:
-                newState.p1.split(a,b)
+                if (newState.p1.split(a,b)): new_states.append(newState)
             new_states.append(newState)
     
     return new_states
