@@ -1,3 +1,6 @@
+import sys
+sys.setrecursionlimit(1000000)
+
 class Hand:
     def __init__(self, num_fingers=1):
         self.num_fingers = num_fingers

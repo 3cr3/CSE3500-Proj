@@ -1,5 +1,7 @@
 from chopsticks import GameState, Player, Hand
 from minimax import minimax
+import sys
+sys.setrecursionlimit(1000000)
 
 if __name__ ==  '__main__':
     place = input("Welcome to chopsticks! Would you like to go first or second? (F/S)").upper()

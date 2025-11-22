@@ -1,5 +1,7 @@
 from chopsticks import GameState, Player, Hand
-
+from math import inf
+import sys
+sys.setrecursionlimit(1000000)
 
 def generate_moves(state):
     myL, myR, oppL, oppR = state.p2.left.num_fingers, state.p2.right.num_fingers, state.p1.left.num_fingers, state.p1.right.num_fingers
@@ -33,9 +35,15 @@ def generate_moves(state):
 def minimax(state):
     if state.is_terminal():
         return state.winner()
-    newState = state.copy()
-    return newState
+    moves = generate_moves(state)
 
-def getbestmove():
+    best = -inf
 
-def apply_move():
+    for state in moves:
+        best = max(best, minimax(state))
+
+    return best
+
+# def getbestmove():
+
+# def apply_move():
