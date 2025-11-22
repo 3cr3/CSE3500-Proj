@@ -77,3 +77,9 @@ class GameState:
             ),
             self.is_p1_turn
         )
+    
+    def equals(self, other):
+        return (self.p1.left.num_fingers == other.p1.left.num_fingers and
+            self.p1.right.num_fingers == other.p1.right.num_fingers and
+            self.p2.left.num_fingers == other.p2.left.num_fingers and
+            self.p2.right.num_fingers == other.p2.right.num_fingers)

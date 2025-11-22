@@ -30,7 +30,7 @@ def generate_moves(state, player):
                         newState.p1.right.add(myHand)
                     else:
                         newState.p2.right.add(myHand)
-                new_states.append(newState)
+                if not newState.equals(state): new_states.append(newState)
         
     #splitting moves
     total = myL + myR
@@ -42,7 +42,7 @@ def generate_moves(state, player):
                 if (newState.p2.split(a, b)): new_states.append(newState)
             else:
                 if (newState.p1.split(a,b)): new_states.append(newState)
-            new_states.append(newState)
+            # new_states.append(newState)
     
     return new_states
 
@@ -60,7 +60,8 @@ def minimax(state, is_maximizing, depth, max_depth):
             val = minimax(move, False, depth+1, max_depth)[0]
             if val > best:
                 best = val
-                best_m = move
+                if not move.equals(state):
+                    best_m = move
     else:
         moves = generate_moves(state, player=1)
         best = inf
@@ -68,7 +69,8 @@ def minimax(state, is_maximizing, depth, max_depth):
             val = minimax(move, True, depth+1, max_depth)[0]
             if val < best:
                 best = val
-                best_m = move
+                if not move.equals(state):
+                    best_m = move
             
 
 
