@@ -54,6 +54,8 @@ def minimax(state, is_maximizing, depth, max_depth):
         return evaluate(state, 0), state if is_maximizing else evaluate(state, 1), state
     if is_maximizing:
         moves = generate_moves(state, player=0)
+        if not moves:
+            return evaluate(state, 0), state
         best = -inf
         best_m = state.copy()
         for move in moves:
@@ -64,6 +66,8 @@ def minimax(state, is_maximizing, depth, max_depth):
                     best_m = move
     else:
         moves = generate_moves(state, player=1)
+        if not moves:
+            return evaluate(state, 1), state
         best = inf
         for move in moves:
             val = minimax(move, True, depth+1, max_depth)[0]
