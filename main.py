@@ -15,23 +15,30 @@ if __name__ ==  '__main__':
 
     while not game.is_terminal():
         print(f"\nYour left hand has {game.p1.left.num_fingers}  and your right hand has {game.p1.right.num_fingers} ")
-        print(f"Your opponent's left hand has {game.p2.left.num_fingers}  and their left hand has {game.p2.right.num_fingers} \n")
+        print(f"Your opponent's left hand has {game.p2.left.num_fingers} and their right hand has {game.p2.right.num_fingers} \n")
         if game.is_p1_turn:
             #Switch turn
             game.is_p1_turn = False
             action = input("Would you like to use your left hand (L), your right hand (R), or split (S)?").upper()
-            while action not in {'L', 'R', 'S'}:
-                action = input("Please choose either left (L), right (R), or split (S).").upper()
-            
+            while action not in {'L', 'R', 'S'} or ((action == 'L' and game.p1.left.num_fingers == 0) or (action == 'R' and game.p1.right.num_fingers == 0)):
+                action = input("Invalid choice. Please choose a valid choice from left (L), right (R), or split (S).").upper()
+        
             if action in {'L', 'R'}:
                 target = input("Would you like to attack your opponent's left hand (L) or right hand (R)?").upper()
                 while target not in {'L', 'R'}:
                     target = input("Please choose either your opponent's left (L) or right (R)").upper()
                 if action == 'L':
-                    game.p2.add(target, game.p1.left.num_fingers)
+                    while not game.p2.add(target, game.p1.left.num_fingers):
+                        option = ['L', 'R']
+                        option.remove(target)
+                        target = input(f"Please choose the only valid target, {option[0]}")
+                        
                 else:
                     #Action from Right hand
-                    game.p2.add(target, game.p1.right.num_fingers)
+                    while not game.p2.add(target, game.p1.right.num_fingers):
+                        option = ['L', 'R']
+                        option.remove(target)
+                        target = input(f"Please choose the only valid target, {option[0]}")
 
             else:
                 #Must be splitting
@@ -44,8 +51,11 @@ if __name__ ==  '__main__':
         else:
             #Switch turn
             game.is_p1_turn = True
-            game = minimax(game)
+            game = minimax(game, True, 0, 5)[1]
     
+    print(f"\nYour left hand has {game.p1.left.num_fingers}  and your right hand has {game.p1.right.num_fingers} ")
+    print(f"Your opponent's left hand has {game.p2.left.num_fingers} and their right hand has {game.p2.right.num_fingers} \n")
+
     if game.winner() == -1:
         print("Congrats! You won!")
     elif game.winner() == 1:

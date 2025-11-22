@@ -19,7 +19,8 @@ class Player:
         elif target_hand.upper() == "R" and self.right.num_fingers > 0:
             self.right.add(val)
         else:
-            print("invalid target")
+            return False
+        return True
     
     def split(self, new_left, new_right):
         total = self.left.num_fingers + self.right.num_fingers
