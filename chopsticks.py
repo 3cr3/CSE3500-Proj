@@ -51,14 +51,14 @@ class GameState:
 
     def winner(self):
         """
-        1  -> Player 1 wins
-        -1 -> Player 2 wins
+        -1  -> Player 1 wins
+        1 -> Player 2 wins
         0  -> Game not complete
         """
         if self.p2.left.num_fingers == 0 and self.p2.right.num_fingers == 0:
-            return 1
-        if self.p1.left.num_fingers == 0 and self.p1.right.num_fingers == 0:
             return -1
+        if self.p1.left.num_fingers == 0 and self.p1.right.num_fingers == 0:
+            return 1
         return 0
 
     def copy(self):

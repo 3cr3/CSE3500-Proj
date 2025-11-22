@@ -42,11 +42,11 @@ if __name__ ==  '__main__':
         else:
             #Switch turn
             game.is_p1_turn = True
-            decision = minimax(game)
+            game = minimax(game)
     
-    if game.winner() == 1:
+    if game.winner() == -1:
         print("Congrats! You won!")
-    elif game.winner() == -1:
+    elif game.winner() == 1:
         print("Sorry, you didn't win this time.")
     else:
         print("Error occurred.")
